@@ -19,7 +19,17 @@
             <ActionItem ios.icon="res://ic_menu" ios.position="left"
             android.icon="res://ic_menu_black_24dp" android.position="actionBar" @tap="toggleDrawer" />
         </ActionBar>
-        <map></map>
+        <TabView :selectedIndex="selectedIndex" androidTabsPosition="bottom">
+            <TabViewItem title="Beer Map">
+                <map></map>
+            </TabViewItem>
+            <TabViewItem title="Beer List">
+                <label text="This is where the List view Goes" />
+            </TabViewItem>
+            <TabViewItem title="Settings">
+                <label text="These are where the user settings are" />
+            </TabViewItem>
+        </TabView>
     </page>
 </template>
 
