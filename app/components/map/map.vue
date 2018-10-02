@@ -15,6 +15,7 @@
             onMapReady(args) {
                 // var markers = this.user.breweries.filter(brewery => brewery.marker);
                 // args.map.addMarkers(markers);
+                args.map.show();
             }
         }
     };

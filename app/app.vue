@@ -1,12 +1,14 @@
 <script>
     import * as utils from "utils/utils";
     import Map from './components/map/map'
+    import SignUp from '@/components/login/signUp'
 
     export default {
         methods: {
         },
         components: {
-            Map
+            Map,
+            SignUp
         }
     }
     
@@ -16,10 +18,9 @@
 <template>
     <page>
         <ActionBar class="action-bar" title="Beer Flight">
-            <ActionItem ios.icon="res://ic_menu" ios.position="left"
-            android.icon="res://ic_menu_black_24dp" android.position="actionBar" @tap="toggleDrawer" />
         </ActionBar>
-        <TabView :selectedIndex="selectedIndex" androidTabsPosition="bottom">
+        <sign-up></sign-up>
+        <!-- <TabView :selectedIndex="selectedIndex" androidTabsPosition="bottom">
             <TabViewItem title="Beer Map">
                 <map></map>
             </TabViewItem>
@@ -29,12 +30,9 @@
             <TabViewItem title="Settings">
                 <label text="These are where the user settings are" />
             </TabViewItem>
-        </TabView>
+        </TabView> -->
     </page>
 </template>
 
 <style scoped>
-    .sideStackLayout {
-        z-index: 1;
-    }
 </style>
