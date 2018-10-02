@@ -1,6 +1,6 @@
 import Vue from 'nativescript-vue';
 
-import App from './app';
+import Home from '@/components/home/home';
 
 
 import './styles.scss';
@@ -11,6 +11,6 @@ Vue.registerElement("Mapbox", () => require("nativescript-mapbox").MapboxView);
 
 new Vue({
 
-  render: h => h('frame', [h(App)]),
+  render: h => h('frame', [h(Home)]),
 
 }).$start();
