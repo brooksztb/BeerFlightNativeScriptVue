@@ -1,6 +1,6 @@
 <script>
     import * as utils from "utils/utils";
-    import Map from '.components/map/map'
+    import Map from './Map'
 
     export default {
         methods: {

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "566727453979",
+    "firebase_url": "https://beer-flight-app-1524578137725.firebaseio.com",
+    "project_id": "beer-flight-app-1524578137725",
+    "storage_bucket": "beer-flight-app-1524578137725.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566727453979:android:4645cf809e46d418",
+        "android_client_info": {
+          "package_name": "beerflight.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566727453979-nncg33bba8et0f3uiku3f2lcsh38jovh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB78burmbszSDt-RMiGCIugxUZ0Al9znJs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
