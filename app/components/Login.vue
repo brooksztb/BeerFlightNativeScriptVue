@@ -43,6 +43,7 @@ export default {
         <GridLayout class='login'>
             
             <LoginInitial ref="loginInitial" @login="showMainContent()" :visible="state === 'initial'"></LoginInitial>
+            <LoginMain ref="loginMain" :visible="state === 'main'"></LoginMain>
 
             <AbsoluteLayout ref="logoContainer" class="logo-container">
             </AbsoluteLayout>
