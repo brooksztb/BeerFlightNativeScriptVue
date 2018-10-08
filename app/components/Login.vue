@@ -1,36 +1,55 @@
 <script>
+import LoginInitial from './LoginInitial';
+import LoginMain from './LoginMain';
+import * as enums from 'ui/enums'    
 
+export default {
+    components: {
+        LoginInitial,
+        LoginMain
+    },
+    data() {
+        return {
+            state: 'initial'
+        }
+    },
+    computed: {
+        pageClasses: function () {
+            return {
+                // add top class so we can apply styles to specific platforms
+                'platform-ios': platformModule.isIOS,
+                'platform-android': platformModule.isAndroid
+            }
+        }
+    },
+    methods: {
+        showMainContent: function() {
+            this.$refs.logoContainer.nativeView
+            .animate({
+            translate: { x: 0, y: platformModule.isAndroid ? -70 : -50 },
+            duration: 500,
+            curve: enums.AnimationCurve.easeIn })
+            .then(() => {
+            this.state = 'main'
+            })
+        }
+    }
+
+}
 </script>
 
 <template>
-    <page>
-        <FlexboxLayout class="page">
-            <StackLayout class="form">
-                <StackLayout class="input-field">
-                    <TextField class="input"></TextField>
-                </StackLayout>
+    <page ref="page" :class="pageClasses" actionBarHidden="true" backgroundSpanUnderStatusBar="true">
+        <GridLayout class='login'>
+            
+            <LoginInitial ref="loginInitial" @login="showMainContent()" :visible="state === 'initial'"></LoginInitial>
 
-                <StackLayout class="input-field">
-                    <TextField class="input"></TextField>
-                </StackLayout>
-
-                <Button text="Log In" class="btn btn-primary"></Button>
-            </StackLayout>
-
-            <Label text="Don’t have an account?"></Label>
-        </FlexboxLayout>
+            <AbsoluteLayout ref="logoContainer" class="logo-container">
+            </AbsoluteLayout>
+        </GridLayout>
     </page>
 </template>
 
 <style scoped>
-    .page {
-        align-items: center;
-        flex-direction: column;
-    }
-    .form {
-        margin-left: 30;
-        margin-right: 30;
-        flex-grow: 2;
-        vertical-align: middle;
-    }
+
 </style>

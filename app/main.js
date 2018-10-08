@@ -37,6 +37,7 @@ firebase.init({
   //     Vue.navigateTo(routes.login, { clearHistory: true })
   //   }
   // }
+  iOSEmulatorFlush: true
 }).then(
   instance => {
     console.log("firebase.init done");

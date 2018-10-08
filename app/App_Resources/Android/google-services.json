@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:566727453979:android:4645cf809e46d418",
+        "mobilesdk_app_id": "1:566727453979:android:58c4e4001957ecd9",
         "android_client_info": {
-          "package_name": "beerflight.application"
+          "package_name": "beerdex.application"
         }
       },
       "oauth_client": [

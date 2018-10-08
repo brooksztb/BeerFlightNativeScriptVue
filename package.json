@@ -5,7 +5,7 @@
   "author": "Zach B <31398142+brooksztb@users.noreply.github.com>",
   "license": "MIT",
   "nativescript": {
-    "id": "beerflight.application",
+    "id": "beerdex.application",
     "tns-ios": {
       "version": "4.2.0"
     },
