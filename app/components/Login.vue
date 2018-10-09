@@ -1,4 +1,5 @@
 <script>
+import * as platformModule from 'tns-core-modules/platform';
 import LoginInitial from './LoginInitial';
 import LoginMain from './LoginMain';
 import * as enums from 'ui/enums'    
@@ -30,8 +31,8 @@ export default {
             duration: 500,
             curve: enums.AnimationCurve.easeIn })
             .then(() => {
-            this.state = 'main'
-            })
+                this.state = 'main'
+            });
         }
     }
 

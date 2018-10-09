@@ -4,7 +4,7 @@ android {
   defaultConfig {  
     generatedDensities = []
     multiDexEnabled true
-    applicationId = "beerflight.application"
+    applicationId = "beerdex.application"
   }
   aaptOptions {  
     additionalParameters "--no-version-vectors"  

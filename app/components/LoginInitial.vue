@@ -20,10 +20,10 @@ export default {
 
 <template>
     <StackLayout ref="initialContainer" class="initial-container" v-bind:visibility="visible?'visible':'collapse'">
-    <Label text="Beerdex"></Label>
-    <StackLayout @tap="welcome()">
-      <Label text="Enter the Beerdex" class="initial-button-label"></Label>
-    </StackLayout>
+      <Label text="Beerdex"></Label>
+      <StackLayout @tap="welcome()">
+        <Label text="Enter the Beerdex" class="initial-button-label"></Label>
+      </StackLayout>
   </StackLayout>
 </template>
 

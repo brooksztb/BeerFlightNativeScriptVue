@@ -3,7 +3,7 @@ import {Animation} from 'ui/Animation';
 import {prompt} from 'ui/dialogs';
 import {Color} from 'tns-core-modules/color';
 import {connectionType, getConnectionType} from 'tns-core-modules/connectivity';
-import User from '../model/User';
+import User from '../models/User';
 import alert from '../utilities/alert';
 
 export default {
@@ -44,92 +44,92 @@ export default {
                 // kick off the animation queue
                 new Animation(animations, false).play();
             }
+        }
+    },
+    methods: {
+        toggleDisplay() {
+            this.isLoggingIn = !this.isLoggingIn;
+            let mainContainer = this.$refs.mainContainer.nativeView;
+            mainContainer.animate({
+                backgroundColor: this.isLoggingIn ? new Color("#F3F3F3") : new Color("#131426"),
+                duration: 200
+            });
         },
-        methods: {
-            toggleDisplay() {
-                this.isLoggingIn = !this.isLoggingIn;
-                let mainContainer = this.$refs.mainContainer.nativeView;
-                mainContainer.animate({
-                    backgroundColor: this.isLoggingIn ? new Color("#F3F3F3") : new Color("#131426"),
-                    duration: 200
-                });
-            },
-            focusPassword() {
-                this.$refs.password.nativeView.focus();
-            },
-            submit() {
-                this.isAuthenticating = true;
-                if (this.isLoggingIn) {
-                    this.login();
-                } else {
-                    this.signUp();
-                }
-            },
-            navigate() {
-                this.$changeRoute('home', {clearHistory: true});
-            },
-            login() {
-                if (getConnectionType() === connectionType.none) {
-                    alert("Beerdex requires an internet connection to log in.");
-                    return;
-                }
-                return this.$authService
-                    .login(this.user)
-                    .then(() => {
-                        this.isAuthenticating = false;
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                        alert("We could not find your account, please check your credentials.");
-                        this.isAuthenticating = false;
-                    });
-            },
-            signUp() {
-                if (getConnectionType() === connectionType.none) {
-                    alert("Beerdex requires an internet connection to register.");
-                    return;
-                }
-                this.$authService
-                    .register(this.user)
-                    .then(() => {
-                        alert("Your account was successfully created.");
-                        this.isAuthenticating = false;
-                        this.toggleDisplay();
-                    })
-                    .catch(error => {
-                        alert(error);
-                        this.isAuthenticating = false;
-                    });
-            },
-            forgotPassword() {
-                prompt({
-                    title: "Forgot Password",
-                    message: "Enter the email address you used to register for Beerdex to reset your password.",
-                    defaultText: "",
-                    okButtonText: "Ok",
-                    cancelButtonText: "Cancel"
-                }).then((data) => {
-                    if (data.result) {
-                        this.isAuthenticating = true;
-                        this.$authService
-                            .resetPassword(data.text.trim())
-                            .then(() => {
-                                this.isAuthenticating = false;
-                                alert("Your password was successfully reset. Please check your email for instructions on choosing a new password.");
-                            })
-                            .catch((error) => {
-                                this.isAuthenticating = false;
-                                console.log("Error resetting your password: " + error);
-                                alert("An error occured resetting your password.");
-                            })
-                    }
-                })
+        focusPassword() {
+            this.$refs.password.nativeView.focus();
+        },
+        submit() {
+            this.isAuthenticating = true;
+            if (this.isLoggingIn) {
+                this.login();
+            } else {
+                this.signUp();
             }
         },
-        mounted() {
-            console.log('LoginMain mounted')
+        navigate() {
+            this.$changeRoute('home', {clearHistory: true});
+        },
+        login() {
+            if (getConnectionType() === connectionType.none) {
+                alert("Beerdex requires an internet connection to log in.");
+                return;
+            }
+            return this.$authService
+                .login(this.user)
+                .then(() => {
+                    this.isAuthenticating = false;
+                })
+                .catch((error) => {
+                    console.error(error);
+                    alert("We could not find your account, please check your credentials.");
+                    this.isAuthenticating = false;
+                });
+        },
+        signUp() {
+            if (getConnectionType() === connectionType.none) {
+                alert("Beerdex requires an internet connection to register.");
+                return;
+            }
+            this.$authService
+                .register(this.user)
+                .then(() => {
+                    alert("Your account was successfully created.");
+                    this.isAuthenticating = false;
+                    this.toggleDisplay();
+                })
+                .catch(error => {
+                    alert(error);
+                    this.isAuthenticating = false;
+                });
+        },
+        forgotPassword() {
+            prompt({
+                title: "Forgot Password",
+                message: "Enter the email address you used to register for Beerdex to reset your password.",
+                defaultText: "",
+                okButtonText: "Ok",
+                cancelButtonText: "Cancel"
+            }).then((data) => {
+                if (data.result) {
+                    this.isAuthenticating = true;
+                    this.$authService
+                        .resetPassword(data.text.trim())
+                        .then(() => {
+                            this.isAuthenticating = false;
+                            alert("Your password was successfully reset. Please check your email for instructions on choosing a new password.");
+                        })
+                        .catch((error) => {
+                            this.isAuthenticating = false;
+                            console.log("Error resetting your password: " + error);
+                            alert("An error occured resetting your password.");
+                        })
+                }
+            })
         }
-    }  
+    },
+    mounted() {
+        console.log('LoginMain mounted')
+    }
 }
 </script>
 
@@ -177,7 +177,7 @@ export default {
             :opacity="isLoggingIn ? 1 : 0"></Label>
 
         <StackLayout ref="signUpStack" class="sign-up-stack" @tap="toggleDisplay()" translateY="50">
-            <Label :text="isLoggingIn ? 'Sign up here' : 'Back to logn'"></Label>
+            <Label :text="isLoggingIn ? 'Sign up here' : 'Back to login'"></Label>
         </StackLayout>
     </StackLayout>
 </template>
