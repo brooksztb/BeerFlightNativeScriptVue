@@ -5,6 +5,8 @@ import {Color} from 'tns-core-modules/color';
 import {connectionType, getConnectionType} from 'tns-core-modules/connectivity';
 import User from '../models/User';
 import alert from '../utilities/alert';
+import feedback from '../utilities/feedback';
+import * as validator from 'email-validator';
 
 export default {
     name: 'login-main',
@@ -51,7 +53,8 @@ export default {
             this.isLoggingIn = !this.isLoggingIn;
             let mainContainer = this.$refs.mainContainer.nativeView;
             mainContainer.animate({
-                backgroundColor: this.isLoggingIn ? new Color("#F3F3F3") : new Color("#131426"),
+                // backgroundColor: this.isLoggingIn ? new Color("#F3F3F3") : new Color("#FFFFFF"),
+                backgroundColor: new Color("#F3F3F3"),
                 duration: 200
             });
         },
@@ -74,6 +77,12 @@ export default {
                 alert("Beerdex requires an internet connection to log in.");
                 return;
             }
+
+            if(!this.user.email || !this.user.password) {
+                alert("Please provide both an email address and password.");
+                return;
+            }
+
             return this.$authService
                 .login(this.user)
                 .then(() => {
@@ -87,20 +96,41 @@ export default {
         },
         signUp() {
             if (getConnectionType() === connectionType.none) {
-                alert("Beerdex requires an internet connection to register.");
+                feedback("No Connection", "Beerdex requires an internet connection to register.", "error");
+                // alert("Beerdex requires an internet connection to register.");
                 return;
             }
+
+            if(!this.user.email || !this.user.password || !this.user.confirmPassword) {
+                this.isAuthenticating = false;
+                alert("Please provide an email address, password, and confirm your password.");
+                return;
+            }
+
+            if(!validator.validate(this.user.email)) {
+                this.isAuthenticating = false;
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            if(this.user.password !== this.user.confirmPassword) {
+                this.isAuthenticating = false;
+                alert("Your passwords do not match.");
+                return;
+            }
+
             this.$authService
-                .register(this.user)
-                .then(() => {
-                    alert("Your account was successfully created.");
-                    this.isAuthenticating = false;
-                    this.toggleDisplay();
-                })
-                .catch(error => {
-                    alert(error);
-                    this.isAuthenticating = false;
-                });
+            .register(this.user)
+            .then(() => {
+                alert("Your account was successfully created.");
+                this.isAuthenticating = false;
+                this.toggleDisplay();
+            })
+            .catch(error => {
+                feedback("Error", error, "error");
+                // alert(error);
+                this.isAuthenticating = false;
+            });
         },
         forgotPassword() {
             prompt({
@@ -159,7 +189,17 @@ export default {
                 :isEnabled="!isAuthenticating"
                 :class="{ light: !isLoggingIn }"
                 row="1"></TextField>
-            <!--TODO Confirm Password Field and Validation on register submit-->
+            <TextField
+                ref="confirmPassword"
+                hint="Confirm Password"
+                secure="true"
+                returnKeyType="done"
+                @returnPress="submit()"
+                v-model="user.confirmPassword"
+                :isEnabled="!isAuthenticating"
+                :class="{ light: !isLoggingIn }"
+                row="2" 
+                :visibility="!isLoggingIn ?'visible':'hidden'"></TextField>
 
             <ActivityIndicator :busy="isAuthenticating" rowSpan="2"></ActivityIndicator>
         </GridLayout>

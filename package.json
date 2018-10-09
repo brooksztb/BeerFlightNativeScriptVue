@@ -14,6 +14,8 @@
     }
   },
   "dependencies": {
+    "email-validator": "^2.0.4",
+    "nativescript-feedback": "^1.2.0",
     "nativescript-mapbox": "^4.2.0",
     "nativescript-plugin-firebase": "^7.1.2",
     "nativescript-theme-core": "^1.0.4",
