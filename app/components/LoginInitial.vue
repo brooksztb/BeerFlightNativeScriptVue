@@ -19,7 +19,7 @@ export default {
 </script>
 
 <template>
-    <StackLayout ref="initialContainer" class="initial-container" v-bind:visibility="visible?'visible':'collapse'">
+    <StackLayout ref="initialContainer" class="initial-container" :visibility="visible?'visible':'collapse'">
       <Label text="Beerdex"></Label>
       <StackLayout @tap="welcome()">
         <Label text="Enter the Beerdex" class="initial-button-label"></Label>

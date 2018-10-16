@@ -15,9 +15,7 @@
 
 <template>
     <page>
-        <ActionBar class="action-bar" title="Beer Flight">
-            <ActionItem ios.icon="res://ic_menu" ios.position="left"
-            android.icon="res://ic_menu_black_24dp" android.position="actionBar" @tap="toggleDrawer" />
+        <ActionBar class="action-bar" title="Beerdex">
         </ActionBar>
         <TabView :selectedIndex="selectedIndex" androidTabsPosition="bottom">
             <TabViewItem title="Beer Map">
@@ -26,7 +24,7 @@
             <TabViewItem title="Beer List">
                 <label text="This is where the List view Goes" />
             </TabViewItem>
-            <TabViewItem title="Settings">
+            <TabViewItem title="Account">
                 <label text="These are where the user settings are" />
             </TabViewItem>
         </TabView>

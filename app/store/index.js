@@ -19,7 +19,16 @@ const mutations = {
 }
 
 const actions = {
-
+    fetchCurrentUser({commit}) {
+        firebase.getCurrentUser().then(
+          function (user) {
+            commit('setUser', user);
+          },
+          function (errorMessage) {
+            console.log(errorMessage);
+          }
+        );
+    }
 }
 
 const store = {

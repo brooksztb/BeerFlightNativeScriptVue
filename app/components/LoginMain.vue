@@ -17,7 +17,8 @@ export default {
         return {
             isLoggingIn: true,
             isAuthenticating: false,
-            user: new User()
+            user: new User(),
+            confirmPassword: ""
         }
     },
     watch : {
@@ -87,6 +88,7 @@ export default {
                 .login(this.user)
                 .then(() => {
                     this.isAuthenticating = false;
+                    navigate();
                 })
                 .catch((error) => {
                     console.error(error);
@@ -101,7 +103,7 @@ export default {
                 return;
             }
 
-            if(!this.user.email || !this.user.password || !this.user.confirmPassword) {
+            if(!this.user.email || !this.user.password || !this.confirmPassword) {
                 this.isAuthenticating = false;
                 alert("Please provide an email address, password, and confirm your password.");
                 return;
@@ -113,7 +115,7 @@ export default {
                 return;
             }
 
-            if(this.user.password !== this.user.confirmPassword) {
+            if(this.user.password !== this.confirmPassword) {
                 this.isAuthenticating = false;
                 alert("Your passwords do not match.");
                 return;
@@ -167,7 +169,7 @@ export default {
     <StackLayout ref="mainContainer" class="main-container" :visibility="visible?'visible':'collaspe'">
         <Label class="main-label" text="Beerdex" :color="isLoggingIn? 'black' : 'white'"></Label>
 
-        <GridLayout ref="formControls" class="form-controls" rows="auto, auto" translateY="50">
+        <StackLayout ref="formControls" class="form-controls" translateY="50">
             <TextField
                 hint="Email Address"
                 keyboardType="email"
@@ -177,8 +179,7 @@ export default {
                 :isEnabled="!isAuthenticating"
                 autoCorrect="false"
                 autoCapitalizationType="none"
-                :class="{ light: !isLoggingIn }"
-                row="0"></TextField>
+                :class="{ light: !isLoggingIn }"></TextField>
             <TextField
                 ref="password"
                 hint="Password"
@@ -187,22 +188,20 @@ export default {
                 @returnPress="submit()"
                 v-model="user.password"
                 :isEnabled="!isAuthenticating"
-                :class="{ light: !isLoggingIn }"
-                row="1"></TextField>
+                :class="{ light: !isLoggingIn }"></TextField>
             <TextField
                 ref="confirmPassword"
                 hint="Confirm Password"
                 secure="true"
                 returnKeyType="done"
                 @returnPress="submit()"
-                v-model="user.confirmPassword"
+                v-model="confirmPassword"
                 :isEnabled="!isAuthenticating"
                 :class="{ light: !isLoggingIn }"
-                row="2" 
                 :visibility="!isLoggingIn ?'visible':'hidden'"></TextField>
 
             <ActivityIndicator :busy="isAuthenticating" rowSpan="2"></ActivityIndicator>
-        </GridLayout>
+        </StackLayout>
 
         <Button
             :text="isLoggingIn ? 'Login' : 'Sign up'"

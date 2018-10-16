@@ -1,4 +1,5 @@
 import Vue from 'nativescript-vue';
+// import VueDevtools from 'nativescript-vue-devtools'
 import firebase from 'nativescript-plugin-firebase'
 
 import routes from './router';
@@ -12,31 +13,34 @@ export const authService = new AuthService();
 
 import './styles.scss';
 
+// Vue.use(VueDevtools);
+
 Vue.prototype.$store = store;
 Vue.prototype.$authService = authService
 //route manually
 Vue.prototype.$changeRoute = (to, options) => {
-  Vue.navigateTo(routes[to], options)
+  Vue.navigateTo(routes[to], options);
 }
 
 // Uncomment the following to see NativeScript-Vue output logs
-//Vue.config.silent = false;
+// Vue.config.silent = false;
 Vue.registerElement("Mapbox", () => require("nativescript-mapbox").MapboxView);
 
 firebase.init({
-  // onAuthStateChanged: data => { // optional
-  //   console.log((data.loggedIn ? "Logged in to firebase" : "Logged out from firebase") + " (init's onAuthStateChanged callback)");
-  //   if (data.loggedIn) {
-  //     backendService.token = data.user.uid
-  //     console.log(data.user.uid)
-  //     store.commit('setUser', data.user)
-  //     Vue.navigateTo(routes.home, { clearHistory: true })
-  //   }
-  //   else {
-  //     backendService.token = ""
-  //     Vue.navigateTo(routes.login, { clearHistory: true })
-  //   }
-  // }
+  onAuthStateChanged: data => { // optional
+    console.log((data.loggedIn ? "Logged in to firebase" : "Logged out from firebase") + " (init's onAuthStateChanged callback)");
+    if (data.loggedIn) {
+      backendService.token = data.user.uid;
+      console.log(data.user.uid);
+      store.commit('setUser', data.user);
+      // Vue.navigateTo(routes.home, { clearHistory: true });
+    }
+    else {
+      backendService.token = "";
+      // Vue.navigateTo(routes.login, { clearHistory: true });
+    }
+  },
+  persist: false,
   iOSEmulatorFlush: true
 }).then(
   instance => {

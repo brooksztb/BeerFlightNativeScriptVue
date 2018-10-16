@@ -195,11 +195,7 @@ module.exports = env => {
                     options: {
                         compiler: NsVueTemplateCompiler,
                     },
-                },
-                { 
-                    test: /\.ts?$/, 
-                    loader: "ts-loader" 
-                },
+                }
             ],
         },
         plugins: [
