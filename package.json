@@ -23,6 +23,7 @@
     "nativescript-vue-devtools": "^1.1.0",
     "tns-core-modules": "^4.2.0",
     "vue-property-decorator": "^7.1.1",
+    "vue-uuid": "^1.0.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
