@@ -1,6 +1,5 @@
 <script>
     import * as utils from "utils/utils";
-    // import { Map } from './models/mapClasses';
 
     export default {
         // props: {
@@ -8,7 +7,7 @@
         // },
         // data () {
         //     return {
-        //         map: new Map
+        //         accessToken: "pk.eyJ1IjoiYnJvb2tzenRiIiwiYSI6ImNqazFrb2d1ZTBpbzAzcHFsY3JqdThqdmUifQ.JeVbFdP5Fc_DZrT8PxPp1w"
         //     };
         // },
         methods: {
@@ -16,12 +15,13 @@
                 // var markers = this.user.breweries.filter(brewery => brewery.marker);
                 // args.map.addMarkers(markers);
             }
-        }
+        },
+        
     };
 </script>
 
 <template>
-    <!--Add way to only load the map when the tab is clicked and keep the map cached to only load it once app load-->
+    <!--Add way to only load the map when the tab is clicked and keep the map cached to only load it once app is loaded for the first time-->
     <GridLayout>
         <!-- <Mapbox
             accessToken= "pk.eyJ1IjoiYnJvb2tzenRiIiwiYSI6ImNqazFrb2d1ZTBpbzAzcHFsY3JqdThqdmUifQ.JeVbFdP5Fc_DZrT8PxPp1w"

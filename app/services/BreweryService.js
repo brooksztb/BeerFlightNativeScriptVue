@@ -87,7 +87,7 @@ export default class BreweryService {
             {
                 'uid': uuid.v4(),
                 'name': beer.name,
-                'tyep': beer.type,
+                'type': beer.type,
                 'ibu': beer.ibu,
                 'alcohol': beer.alcohol,
                 'rating': beer.rating,
