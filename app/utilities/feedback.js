@@ -3,21 +3,22 @@ import { Feedback, FeedbackType, FeedbackPosition } from 'nativescript-feedback'
 export default function feedback(title, message, type) {
     switch(type) {
         case "success":
-            Feedback.success({
+            new Feedback().success({
                 title: title,
                 message: message,
                 duration: 4000
             });
             break;
         case "error": 
-            Feedback.error({
+            new Feedback().error({
                 title: title,
                 message: message,
+                duration: 0,
                 onTap: () => { Feedback.hide() }
             });
             break;
         default:
-            Feedback.info({
+            new Feedback().info({
                 title: title,
                 message: message,
                 duration: 4000

@@ -1,6 +1,6 @@
 import firebase from 'nativescript-plugin-firebase'
 import store from '../store';
-import uuid from 'vue-uuid';
+import uuid from 'uuid';
 
 export default class BreweryService {
     getCurrentUser() {

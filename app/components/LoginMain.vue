@@ -80,7 +80,9 @@ export default {
             }
 
             if(!this.user.email || !this.user.password) {
-                alert("Please provide both an email address and password.");
+                // alert("Please provide both an email address and password.");
+                 feedback("Invalid Login", "Please provide both an email address and password.", "error");
+                 this.isAuthenticating = false;
                 return;
             }
 
