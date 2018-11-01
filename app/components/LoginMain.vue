@@ -75,12 +75,12 @@ export default {
         },
         login() {
             if (getConnectionType() === connectionType.none) {
-                alert("Beerdex requires an internet connection to log in.");
+                feedback("No Connection", "Beerdex requires an internet connection to log in.", "error");
+                 this.isAuthenticating = false;
                 return;
             }
 
             if(!this.user.email || !this.user.password) {
-                // alert("Please provide both an email address and password.");
                  feedback("Invalid Login", "Please provide both an email address and password.", "error");
                  this.isAuthenticating = false;
                 return;
@@ -94,45 +94,43 @@ export default {
                 })
                 .catch((error) => {
                     console.error(error);
-                    alert("We could not find your account, please check your credentials.");
+                    feedback("Invalid Login", "We could not find your account, please check your credentials.", "error");
                     this.isAuthenticating = false;
                 });
         },
         signUp() {
             if (getConnectionType() === connectionType.none) {
                 feedback("No Connection", "Beerdex requires an internet connection to register.", "error");
-                // alert("Beerdex requires an internet connection to register.");
                 return;
             }
 
             if(!this.user.email || !this.user.password || !this.confirmPassword) {
+                feedback("Invalid Signup", "Please provide an email address, password, and confirm your password.", "error");
                 this.isAuthenticating = false;
-                alert("Please provide an email address, password, and confirm your password.");
                 return;
             }
 
             if(!validator.validate(this.user.email)) {
+                feedback("Invalid Email", "Please enter a valid email address.", "error");
                 this.isAuthenticating = false;
-                alert("Please enter a valid email address.");
                 return;
             }
 
             if(this.user.password !== this.confirmPassword) {
+                feedback("Invalid Password", "Your passwords do not match.", "error");
                 this.isAuthenticating = false;
-                alert("Your passwords do not match.");
                 return;
             }
 
             this.$authService
             .register(this.user)
             .then(() => {
-                alert("Your account was successfully created.");
+                feedback("", "Your account was successfully created.", "success");
                 this.isAuthenticating = false;
                 this.toggleDisplay();
             })
             .catch(error => {
                 feedback("Error", error, "error");
-                // alert(error);
                 this.isAuthenticating = false;
             });
         },
@@ -149,13 +147,13 @@ export default {
                     this.$authService
                         .resetPassword(data.text.trim())
                         .then(() => {
+                            feedback("", "Your password was successfully reset. Please check your email for instructions on choosing a new password.", "success");
                             this.isAuthenticating = false;
-                            alert("Your password was successfully reset. Please check your email for instructions on choosing a new password.");
                         })
                         .catch((error) => {
+                            feedback("", "An error occured resetting your password.", "error");
                             this.isAuthenticating = false;
                             console.log("Error resetting your password: " + error);
-                            alert("An error occured resetting your password.");
                         })
                 }
             })
@@ -204,7 +202,6 @@ export default {
 
             <ActivityIndicator :busy="isAuthenticating" rowSpan="2"></ActivityIndicator>
         </StackLayout>
-
         <Button
             :text="isLoggingIn ? 'Login' : 'Sign up'"
             :isEnabled="!isAuthenticating"
@@ -220,6 +217,7 @@ export default {
         <StackLayout ref="signUpStack" class="sign-up-stack" @tap="toggleDisplay()" translateY="50">
             <Label :text="isLoggingIn ? 'Sign up here' : 'Back to login'"></Label>
         </StackLayout>
+        
     </StackLayout>
 </template>
 

@@ -13,8 +13,7 @@ export default function feedback(title, message, type) {
             new Feedback().error({
                 title: title,
                 message: message,
-                duration: 0,
-                onTap: () => { Feedback.hide() }
+                duration: 5000
             });
             break;
         default:

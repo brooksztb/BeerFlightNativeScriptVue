@@ -20,14 +20,14 @@ export default {
 
 <template>
     <StackLayout ref="initialContainer" class="initial-container" :visibility="visible?'visible':'collapse'">
-      <Label text="Beerdex"></Label>
+      <Label class="inital-title" text="Beerdex" />
       <StackLayout @tap="welcome()">
-        <Label text="Enter the Beerdex" class="initial-button-label"></Label>
+        <Label text="Enter the Beerdex" class="initial-button-label" />
       </StackLayout>
   </StackLayout>
 </template>
 
 <style scoped>
-
+  
 </style>
 
