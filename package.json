@@ -7,10 +7,10 @@
   "nativescript": {
     "id": "beerdex.application",
     "tns-ios": {
-      "version": "4.2.0"
+      "version": "5.0.0"
     },
     "tns-android": {
-      "version": "4.2.0"
+      "version": "5.0.0"
     }
   },
   "dependencies": {
@@ -21,7 +21,7 @@
     "nativescript-theme-core": "^1.0.4",
     "nativescript-vue": "^2.0.0",
     "nativescript-vue-devtools": "^1.1.0",
-    "tns-core-modules": "^4.2.0",
+    "tns-core-modules": "^5.0.2",
     "uuid": "^3.3.2",
     "vue-property-decorator": "^7.1.1",
     "vue-uuid": "^1.0.0",
